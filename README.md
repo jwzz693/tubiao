@@ -18,7 +18,41 @@
 - 🌐 社交媒体预览图（Open Graph / Twitter Card / YouTube）
 - 👀 HTML 预览页面，一目了然
 
-## 📦 支持的图标类型
+## �️ 图标预览
+
+### 内置模板
+
+<p align="center">
+  <img src="src/icon.png" width="128" height="128" alt="主图标">&nbsp;&nbsp;&nbsp;
+  <img src="src/app-icon.png" width="128" height="128" alt="应用图标">&nbsp;&nbsp;&nbsp;
+  <img src="src/web-icon.png" width="128" height="128" alt="Web图标">&nbsp;&nbsp;&nbsp;
+  <img src="src/logo-icon.png" width="128" height="128" alt="Logo图标">
+</p>
+
+<p align="center">
+  <sub>主图标</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub>应用图标</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub>Web 图标</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <sub>Logo 图标</sub>
+</p>
+
+### 生成的多尺寸示例
+
+生成后的图标覆盖所有平台和尺寸：
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="src/icon.png" width="16" height="16"><br><sub>16px</sub></td>
+    <td align="center"><img src="src/icon.png" width="32" height="32"><br><sub>32px</sub></td>
+    <td align="center"><img src="src/icon.png" width="48" height="48"><br><sub>48px</sub></td>
+    <td align="center"><img src="src/icon.png" width="64" height="64"><br><sub>64px</sub></td>
+    <td align="center"><img src="src/icon.png" width="96" height="96"><br><sub>96px</sub></td>
+    <td align="center"><img src="src/icon.png" width="128" height="128"><br><sub>128px</sub></td>
+    <td align="center"><img src="src/icon.png" width="256" height="256"><br><sub>256px</sub></td>
+  </tr>
+</table>
+
+## �📦 支持的图标类型
 
 | 类型 | 格式 | 尺寸 | 用途 |
 |------|------|------|------|
