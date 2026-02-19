@@ -1,6 +1,22 @@
 # 🎨 图标资源工具包 (Icon Resource Toolkit)
 
-一站式图标生成 & 管理工具，支持所有主流平台的图标格式。
+[![GitHub](https://img.shields.io/badge/GitHub-jwzz693%2Ftubiao-blue?logo=github)](https://github.com/jwzz693/tubiao)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Actions](https://github.com/jwzz693/tubiao/actions/workflows/generate.yml/badge.svg)](https://github.com/jwzz693/tubiao/actions)
+
+> 🔗 **仓库地址**: [https://github.com/jwzz693/tubiao](https://github.com/jwzz693/tubiao)
+
+一站式图标生成 & 管理工具，支持所有主流平台的图标格式。从一张 1024×1024 PNG 源图自动生成 **10 种平台** 共 **78+ 个图标文件**。
+
+## ✨ 特性
+
+- 🖼️ 一键生成所有平台图标（Windows / macOS / Android / iOS / PWA / Electron / Web）
+- 🤖 GitHub Actions 自动化 — 推送源图标后自动重新生成
+- 🎨 内置 4 种精美 SVG 模板，开箱即用
+- 📱 支持 Android 自适应圆形图标
+- 📦 自动生成 PWA `manifest.json` 和 `browserconfig.xml`
+- 🌐 社交媒体预览图（Open Graph / Twitter Card / YouTube）
+- 👀 HTML 预览页面，一目了然
 
 ## 📦 支持的图标类型
 
@@ -89,7 +105,15 @@ tubiao/
 
 ## ⚙️ GitHub Actions 自动化
 
-每次推送新的源图标到 `src/` 目录时，GitHub Actions 会自动生成所有格式的图标并提交到仓库。
+每次推送新的源图标到 `src/` 目录时，GitHub Actions 会自动：
+
+1. 从 SVG 生成 PNG 源文件
+2. 生成全部 10 种平台的图标
+3. 生成 PWA manifest
+4. 自动提交生成结果到仓库
+5. 上传构建产物（Artifacts，保留 90 天）
+
+支持手动触发：在 GitHub 仓库 → Actions → "生成图标资源" → Run workflow
 
 ## 🛠️ 自定义配置
 
@@ -108,3 +132,17 @@ tubiao/
 ## 📄 License
 
 MIT License
+
+## 🙏 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+1. Fork 本仓库
+2. 创建分支 (`git checkout -b feature/my-icon`)
+3. 提交更改 (`git commit -m '添加新图标模板'`)
+4. 推送分支 (`git push origin feature/my-icon`)
+5. 提交 Pull Request
+
+---
+
+<p align="center">Made with ❤️ by <a href="https://github.com/jwzz693">jwzz693</a></p>
