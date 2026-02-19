@@ -22,6 +22,9 @@ Thumbs.db
 .DS_Store
 Desktop.ini
 
+# Vercel
+.vercel
+
 # 临时文件
 *.tmp
 *.bak
