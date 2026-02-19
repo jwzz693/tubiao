@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图标资源预览</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 .badge {
+            font-size: 0.6em;
+            background: #333;
+            padding: 3px 10px;
+            border-radius: 12px;
+            color: #aaa;
+            font-weight: normal;
+        }
+
+        .icon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: end;
+        }
+
+        .icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            background: #1a1a2e;
+            border-radius: 12px;
+            border: 1px solid #2a2a4a;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .icon-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border-color: #667eea;
+        }
+
+        .icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+            min-height: 80px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a2e 0% 50%) 0 0 / 16px 16px;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        .icon-wrapper img {
+            max-width: 100%;
+            height: auto;
+            image-rendering: -webkit-optimize-contrast;
+        }
+
+        .icon-label {
+            font-size: 0.8em;
+            color: #aaa;
+            text-align: center;
+            word-break: break-all;
+        }
+
+        .icon-size {
+            font-size: 0.7em;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .svg-preview {
+            width: 200px;
+            height: 200px;
+        }
+
+        .social-preview {
+            max-width: 400px;
+        }
+
+        .social-preview img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .info-box {
+            background: #1a1a2e;
+            border: 1px solid #2a2a4a;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            font-size: 0.9em;
+        }
+
+        .info-box code {
+            background: #2a2a4a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #a5d6ff;
+            font-size: 0.9em;
+        }
+
+        .status {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .status .icon { font-size: 3em; margin-bottom: 16px; }
+
+        .generate-btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-bar button {
+            padding: 8px 16px;
+            background: #1a1a2e;
+            color: #aaa;
+            border: 1px solid #2a2a4a;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .tab-bar button:hover,
+        .tab-bar button.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .icon-grid { gap: 12px; }
+            .icon-item { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 图标资源预览</h1>
+        <p class="subtitle">Icon Resource Toolkit — 一站式图标生成 & 管理</p>
+
+        <div class="tab-bar">
+            <button class="active" onclick="showAll(this)">全部</button>
+            <button onclick="showSection('windows', this)">Windows</button>
+            <button onclick="showSection('macos', this)">macOS</button>
+            <button onclick="showSection('favicon', this)">Favicon</button>
+            <button onclick="showSection('apple', this)">Apple Touch</button>
+            <button onclick="showSection('android', this)">Android</button>
+            <button onclick="showSection('pwa', this)">PWA</button>
+            <button onclick="showSection('png', this)">PNG</button>
+            <button onclick="showSection('svg', this)">SVG</button>
+            <button onclick="showSection('electron', this)">Electron</button>
+            <button onclick="showSection('social', this)">社交媒体</button>
+        </div>
+
+        <!-- SVG 源文件预览 -->
+        <div class="section" data-section="svg">
+            <h2>✏️ SVG 矢量图标 <span class="badge">可无限缩放</span></h2>
+            <div class="icon-grid">
+                <div class="icon-item">
+                    <div class="icon-wrapper svg-preview">
+                        <img src="src/icon.svg" alt="Main SVG">
+                    </div>
+                    <span class="icon-label">icon.svg</span>
+                    <span class="icon-size">主图标</span>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-wrapper svg-preview">
+                        <img src="templates/app-icon.svg" alt="App SVG">
+                    </div>
+                    <span class="icon-label">app-icon.svg</span>
+                    <span class="icon-size">应用模板</span>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-wrapper svg-preview">
+                        <img src="templates/web-icon.svg" alt="Web SVG">
+                    </div>
+                    <span class="icon-label">web-icon.svg</span>
+                    <span class="icon-size">Web 模板</span>
+                </div>
+                <div class="icon-item">
+                    <div class="icon-wrapper svg-preview">
+                        <img src="templates/logo-icon.svg" alt="Logo SVG">
+                    </div>
+                    <span class="icon-label">logo-icon.svg</span>
+                    <span class="icon-size">Logo 模板</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Windows -->
+        <div class="section" data-section="windows">
+            <h2>🪟 Windows ICO <span class="badge">.ico 多尺寸</span></h2>
+            <div class="icon-grid" id="windows-icons"></div>
+            <div class="info-box">
+                💡 <code>icon.ico</code> 包含 16/24/32/48/64/128/256 共 7 个尺寸，适用于 Windows 桌面应用。
+            </div>
+        </div>
+
+        <!-- macOS -->
+        <div class="section" data-section="macos">
+            <h2>🍎 macOS ICNS <span class="badge">.iconset</span></h2>
+            <div class="icon-grid" id="macos-icons"></div>
+            <div class="info-box">
+                💡 在 macOS 终端运行 <code>iconutil -c icns AppIcon.iconset</code> 生成 .icns 文件。
+            </div>
+        </div>
+
+        <!-- Favicon -->
+        <div class="section" data-section="favicon">
+            <h2>🌐 Favicon <span class="badge">网站图标</span></h2>
+            <div class="icon-grid" id="favicon-icons"></div>
+            <div class="info-box">
+                引用代码:<br>
+                <code>&lt;link rel="icon" href="/favicon.ico"&gt;</code><br>
+                <code>&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;</code>
+            </div>
+        </div>
+
+        <!-- Apple Touch -->
+        <div class="section" data-section="apple">
+            <h2>📱 Apple Touch Icons <span class="badge">iOS 书签</span></h2>
+            <div class="icon-grid" id="apple-icons"></div>
+        </div>
+
+        <!-- Android -->
+        <div class="section" data-section="android">
+            <h2>🤖 Android Icons <span class="badge">各 DPI</span></h2>
+            <div class="icon-grid" id="android-icons"></div>
+        </div>
+
+        <!-- PWA -->
+        <div class="section" data-section="pwa">
+            <h2>📦 PWA Icons <span class="badge">渐进式 Web 应用</span></h2>
+            <div class="icon-grid" id="pwa-icons"></div>
+        </div>
+
+        <!-- PNG -->
+        <div class="section" data-section="png">
+            <h2>🖼️ PNG 多尺寸 <span class="badge">通用</span></h2>
+            <div class="icon-grid" id="png-icons"></div>
+        </div>
+
+        <!-- Electron -->
+        <div class="section" data-section="electron">
+            <h2>⚡ Electron 图标 <span class="badge">跨平台桌面</span></h2>
+            <div class="icon-grid" id="electron-icons"></div>
+        </div>
+
+        <!-- Social -->
+        <div class="section" data-section="social">
+            <h2>📢 社交媒体 <span class="badge">分享预览</span></h2>
+            <div class="icon-grid" id="social-icons"></div>
+        </div>
+
+        <div class="status" id="empty-notice" style="display:none">
+            <div class="icon">📂</div>
+            <p>还没有生成图标文件</p>
+            <p style="margin-top:8px; font-size:0.9em">请先运行生成脚本：</p>
+            <p><code style="background:#1a1a2e; padding:8px 16px; border-radius:6px; display:inline-block; margin-top:8px">python scripts/generate_icons.py</code></p>
+        </div>
+    </div>
+
+    <script>
+        // 图标配置
+        const iconConfigs = {
+            windows: {
+                container: 'windows-icons',
+                basePath: 'dist/windows',
+                files: [
+                    { name: 'icon-16x16.png', size: 16 },
+                    { name: 'icon-24x24.png', size: 24 },
+                    { name: 'icon-32x32.png', size: 32 },
+                    { name: 'icon-48x48.png', size: 48 },
+                    { name: 'icon-64x64.png', size: 64 },
+                    { name: 'icon-128x128.png', size: 128 },
+                    { name: 'icon-256x256.png', size: 256 },
+                ]
+            },
+            macos: {
+                container: 'macos-icons',
+                basePath: 'dist/macos/AppIcon.iconset',
+                files: [
+                    { name: 'icon_16x16.png', size: 16 },
+                    { name: 'icon_32x32.png', size: 32 },
+                    { name: 'icon_128x128.png', size: 128 },
+                    { name: 'icon_256x256.png', size: 256 },
+                    { name: 'icon_512x512.png', size: 512 },
+                ]
+            },
+            favicon: {
+                container: 'favicon-icons',
+                basePath: 'dist/favicon',
+                files: [
+                    { name: 'favicon-16x16.png', size: 16 },
+                    { name: 'favicon-32x32.png', size: 32 },
+                    { name: 'favicon-48x48.png', size: 48 },
+                ]
+            },
+            apple: {
+                container: 'apple-icons',
+                basePath: 'dist/apple-touch',
+                files: [
+                    { name: 'apple-touch-icon-120x120.png', size: 120 },
+                    { name: 'apple-touch-icon-152x152.png', size: 152 },
+                    { name: 'apple-touch-icon-167x167.png', size: 167 },
+                    { name: 'apple-touch-icon-180x180.png', size: 180 },
+                ]
+            },
+            android: {
+                container: 'android-icons',
+                basePath: 'dist/android',
+                files: [
+                    { name: 'mipmap-ldpi/ic_launcher.png', size: 36, label: 'ldpi' },
+                    { name: 'mipmap-mdpi/ic_launcher.png', size: 48, label: 'mdpi' },
+                    { name: 'mipmap-hdpi/ic_launcher.png', size: 72, label: 'hdpi' },
+                    { name: 'mipmap-xhdpi/ic_launcher.png', size: 96, label: 'xhdpi' },
+                    { name: 'mipmap-xxhdpi/ic_launcher.png', size: 144, label: 'xxhdpi' },
+                    { name: 'mipmap-xxxhdpi/ic_launcher.png', size: 192, label: 'xxxhdpi' },
+                ]
+            },
+            pwa: {
+                container: 'pwa-icons',
+                basePath: 'dist/pwa',
+                files: [
+                    { name: 'icon-72x72.png', size: 72 },
+                    { name: 'icon-96x96.png', size: 96 },
+                    { name: 'icon-128x128.png', size: 128 },
+                    { name: 'icon-144x144.png', size: 144 },
+                    { name: 'icon-192x192.png', size: 192 },
+                    { name: 'icon-384x384.png', size: 384 },
+                    { name: 'icon-512x512.png', size: 512 },
+                ]
+            },
+            png: {
+                container: 'png-icons',
+                basePath: 'dist/png',
+                files: [
+                    { name: 'icon-16x16.png', size: 16 },
+                    { name: 'icon-32x32.png', size: 32 },
+                    { name: 'icon-48x48.png', size: 48 },
+                    { name: 'icon-64x64.png', size: 64 },
+                    { name: 'icon-96x96.png', size: 96 },
+                    { name: 'icon-128x128.png', size: 128 },
+                    { name: 'icon-256x256.png', size: 256 },
+                    { name: 'icon-512x512.png', size: 512 },
+                ]
+            },
+            electron: {
+                container: 'electron-icons',
+                basePath: 'dist/electron',
+                files: [
+                    { name: 'mac/icon.png', size: 128, label: 'macOS (1024px)' },
+                    { name: 'linux/icon.png', size: 128, label: 'Linux (512px)' },
+                ]
+            },
+            social: {
+                container: 'social-icons',
+                basePath: 'dist/social',
+                files: [
+                    { name: 'og_image.png', size: null, label: 'Open Graph (1200×630)', social: true },
+                    { name: 'twitter_card.png', size: null, label: 'Twitter Card (1200×600)', social: true },
+                    { name: 'youtube_thumb.png', size: null, label: 'YouTube (1280×720)', social: true },
+                ]
+            }
+        };
+
+        function renderIcons() {
+            for (const [key, config] of Object.entries(iconConfigs)) {
+                const container = document.getElementById(config.container);
+                if (!container) continue;
+
+                container.innerHTML = '';
+                for (const file of config.files) {
+                    const item = document.createElement('div');
+                    item.className = 'icon-item';
+
+                    const displaySize = file.size ? Math.min(file.size, 128) : 200;
+                    const isSocial = file.social;
+
+                    item.innerHTML = `
+                        <div class="icon-wrapper ${isSocial ? 'social-preview' : ''}" 
+                             style="${!isSocial ? `width:${displaySize + 32}px; height:${displaySize + 32}px` : 'width:300px;height:auto'}">
+                            <img src="${config.basePath}/${file.name}" 
+                                 alt="${file.name}"
+                                 style="${!isSocial ? `width:${displaySize}px; height:${displaySize}px` : 'width:100%'}"
+                                 onerror="this.parentElement.innerHTML='<span style=\\'color:#555;font-size:0.8em\\'>未生成</span>'">
+                        </div>
+                        <span class="icon-label">${file.label || file.name}</span>
+                        ${file.size ? `<span class="icon-size">${file.size}×${file.size}</span>` : ''}
+                    `;
+                    container.appendChild(item);
+                }
+            }
+        }
+
+        function showSection(section, btn) {
+            document.querySelectorAll('.section').forEach(s => {
+                s.classList.toggle('hidden', s.dataset.section !== section);
+            });
+            document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function showAll(btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('hidden'));
+            document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        renderIcons();
+    </script>
+</body>
+</html>

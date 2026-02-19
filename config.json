@@ -1,0 +1,20 @@
+{
+    "source": "src/icon.png",
+    "app_name": "MyApp",
+    "background_color": "#ffffff",
+    "theme_color": "#4a90d9",
+    "padding_percent": 10,
+    "formats": {
+        "windows_ico": true,
+        "macos_icns": true,
+        "favicon": true,
+        "apple_touch": true,
+        "android": true,
+        "pwa": true,
+        "png_sizes": true,
+        "svg": true,
+        "electron": true,
+        "social": true
+    },
+    "custom_png_sizes": [16, 24, 32, 48, 64, 96, 128, 256, 512, 1024]
+}
