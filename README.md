@@ -3,8 +3,11 @@
 [![GitHub](https://img.shields.io/badge/GitHub-jwzz693%2Ftubiao-blue?logo=github)](https://github.com/jwzz693/tubiao)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![GitHub Actions](https://github.com/jwzz693/tubiao/actions/workflows/generate.yml/badge.svg)](https://github.com/jwzz693/tubiao/actions)
+[![Vercel](https://img.shields.io/badge/Vercel-在线预览-black?logo=vercel)](https://tubiao-ashy.vercel.app/preview.html)
 
 > 🔗 **仓库地址**: [https://github.com/jwzz693/tubiao](https://github.com/jwzz693/tubiao)
+> 
+> 🌐 **在线预览**: [https://tubiao-ashy.vercel.app](https://tubiao-ashy.vercel.app/preview.html)
 
 一站式图标生成 & 管理工具，支持所有主流平台的图标格式。从一张 1024×1024 PNG 源图自动生成 **10 种平台** 共 **78+ 个图标文件**。
 
